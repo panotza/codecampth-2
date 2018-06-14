@@ -60,17 +60,19 @@ const signinGetHandler = async ctx => {
 
 const signinPostHandler = async ctx => {
   const hashedPassword = '$2a$10$Q49GCf4uEOVoBCVqlaPmeOs481Jz2ygQN4GaIaDhLqjFC2gtY7sZq'
-  if (ctx.request.body.username === '') {
+  if (!ctx.request.body.username) {
     ctx.session.flash = { error: 'username required' }
     ctx.status = 303
     return ctx.redirect('/signin')
   }
+
   const same = await bcrypt.compare(ctx.request.body.password, hashedPassword)
   if (!same) {
     ctx.session.flash = { error: 'wrong password' }
     ctx.status = 303
     return ctx.redirect('/signin')
   }
+
   ctx.session.userId = 5125
   ctx.redirect('/')
 }
