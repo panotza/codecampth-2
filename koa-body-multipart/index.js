@@ -9,7 +9,7 @@ const fs = require('fs-extra')
 const app = new Koa()
 const router = new Router()
 
-const pictureDir = path.join(__dirname, 'public', 'upload')
+const pictureDir = path.join(__dirname, 'public', 'images')
 
 render(app, {
   root: path.join(__dirname, 'views'),
