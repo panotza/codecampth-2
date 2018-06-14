@@ -6,6 +6,7 @@ const koaBody = require('koa-body')
 
 const app = new Koa()
 const router = new Router()
+
 render(app, {
   root: path.join(__dirname, 'views'),
   layout: 'template',
