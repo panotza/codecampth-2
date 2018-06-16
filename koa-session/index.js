@@ -38,7 +38,7 @@ const flash = async (ctx, next) => { // Flash middleware
   if (!ctx.session) throw new Error('flash message required session')
   ctx.flash = ctx.session.flash
   await next()
-  if (ctx.status !== 303) delete ctx.session.flash
+  if (ctx.status !== 302) delete ctx.session.flash
 }
 
 const checkAuth = async (ctx, next) => {
@@ -62,14 +62,12 @@ const signinPostHandler = async ctx => {
   const hashedPassword = '$2a$10$Q49GCf4uEOVoBCVqlaPmeOs481Jz2ygQN4GaIaDhLqjFC2gtY7sZq'
   if (!ctx.request.body.username) {
     ctx.session.flash = { error: 'username required' }
-    ctx.status = 303
     return ctx.redirect('/signin')
   }
 
   const same = await bcrypt.compare(ctx.request.body.password, hashedPassword)
   if (!same) {
     ctx.session.flash = { error: 'wrong password' }
-    ctx.status = 303
     return ctx.redirect('/signin')
   }
 

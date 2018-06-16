@@ -21,7 +21,6 @@ async function signinGetHandler (ctx) {
 function signinPostHandler (ctx) {
   console.log('username: ', ctx.request.body.username)
   console.log('password: ', ctx.request.body.password)
-  ctx.status = 303
   ctx.redirect('/signin')
 }
 
