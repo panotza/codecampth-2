@@ -38,10 +38,10 @@ const uploadHandler = async ctx => {
     // move uploaded file from temp dir to destination
     await fs.rename(ctx.request.files.photo.path, path.join(pictureDir, fileName))
     ctx.redirect('/')
-  } catch (e) {
+  } catch (err) {
     // handle error here
     ctx.status = 400
-    ctx.body = e.message
+    ctx.body = err.message
     // remove uploaded temporary file when the error occurs
     fs.remove(ctx.request.files.photo.path)
   }
