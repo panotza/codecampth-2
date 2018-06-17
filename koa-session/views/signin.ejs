@@ -1,4 +1,4 @@
-<% if (flash.error) { %>
+<% if (flash && flash.error) { %>
     <p style="color: red;"><%= flash.error %></p>
 <% } %>
 <form method="POST">
