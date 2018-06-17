@@ -37,8 +37,8 @@ const sessionConfig = {
 const flash = async (ctx, next) => { // Flash middleware
   if (!ctx.session) throw new Error('flash message required session')
   ctx.flash = ctx.session.flash
+  delete ctx.session.flash
   await next()
-  if (ctx.status !== 302) delete ctx.session.flash
 }
 
 const checkAuth = async (ctx, next) => {
